@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Created by jack on 2016-08-18 下午9:38.
+ * Created by zhouhuansheng on 2016-08-18.
  */
 public class IdGenerator {
     private final static Logger logger = LoggerFactory.getLogger(IdGenerator.class);
