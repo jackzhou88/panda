@@ -1,2 +1,2 @@
-# pandar
-Some powerful code.
+# Panda
+Some powerful utils.
