@@ -1,10 +1,10 @@
-package com.jack.util;
+package com.panda.util;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Created by zhouhuansheng on 2016-08-18.
+ * @author: dave01.zhou  Time: 2018/2/9 10:56
  */
 public class IdGenerator {
     private final static Logger logger = LoggerFactory.getLogger(IdGenerator.class);
@@ -26,9 +26,9 @@ public class IdGenerator {
     }
 
     public IdGenerator(long moduleId) {
-        if (moduleId > this.maxWorkerId || moduleId < 0) {
+        if (moduleId > maxWorkerId || moduleId < 0) {
             throw new IllegalArgumentException(String.format("Worker id can't be greater than %d or less than 0",
-                    this.maxWorkerId));
+                    maxWorkerId));
         }
         this.workerId = moduleId;
     }
@@ -36,7 +36,7 @@ public class IdGenerator {
     public synchronized long nextId() {
         long timestamp = this.timeGen();
         if (this.lastTimestamp == timestamp) {
-            this.sequence = (this.sequence + 1) & this.sequenceMask;
+            this.sequence = (this.sequence + 1) & sequenceMask;
             if (this.sequence == 0) {
                 logger.trace("###########" + sequenceMask);
                 timestamp = this.tilNextMillis(this.lastTimestamp);
@@ -48,7 +48,7 @@ public class IdGenerator {
             logger.warn("Clock moved backwards. Refusing to generate id for {} milliseconds", this.lastTimestamp - timestamp);
         }
         this.lastTimestamp = timestamp;
-        long nextId = ((timestamp - twepoch << timestampLeftShift)) | (this.workerId << this.workerIdShift) | (this.sequence);
+        long nextId = ((timestamp - twepoch << timestampLeftShift)) | (this.workerId << workerIdShift) | (this.sequence);
         logger.trace("timestamp:{},timestampLeftShift:{},nextId:{},workerId:{},sequence:{}", timestamp, timestampLeftShift,
                 nextId, workerId, sequence);
         return nextId;

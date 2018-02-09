@@ -1,2 +1,2 @@
-# algorithm
-Algorithm code.
+# pandar
+Some powerful code.
